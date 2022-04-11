@@ -7,7 +7,8 @@ const Slides = [
         content: {
             title: 'Encuentra lo mejor ⭐',
             description: 'Tienes dudas sobre qué elegir? No te preocupes! Brindamos asesoria inmediata!',
-        }
+        },
+        image: require('Assets/images/girl-one-no-bg.png')
     },
     {
         title: 'Modernizate',
@@ -15,7 +16,8 @@ const Slides = [
         content: {
             title: 'Escúchalo primero, encuéntralo primero 😎',
             description: '¿Buscas servicios de última calidad? ¡Encuentralos acá!'
-        }
+        },
+        image: require('Assets/images/skin-care.png')
     },
     {
         title: 'Transformate',
@@ -23,7 +25,8 @@ const Slides = [
         content: {
             title: 'Tu cuerpo, tu apariencia 🤴 👸',  
             description: 'Empieza a cuidar tu apariencia con los mejores médicos especializados 👩‍⚕️ 👨‍⚕️'
-        }
+        },
+        image: require('Assets/images/girl-one-no-bg.png')
     },
     {
         title: 'Estimate',
@@ -31,7 +34,8 @@ const Slides = [
         content: {
             title: 'Mirate bien, siéntete bien 💆',
             description: 'Descubre lo último en cuidado corporal y facial y explora tu personalidad'
-        }
+        },
+        image: require('Assets/images/girl-one-no-bg.png')
     }
 ];
 

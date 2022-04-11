@@ -17,6 +17,7 @@ const Light = {
         text3: '#32463D',
         boxBackground: '#F1F3F6',
         primaryBackground: '#B8E8D1',
+        slideTwoBackground: '#EFFEF1',
         secondaryBackground: '#BFEAF5',
         thirdBackground: '#8D492F',
         fourthBackground: '#FFE4D9',

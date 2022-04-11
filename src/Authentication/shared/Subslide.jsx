@@ -1,14 +1,16 @@
-import { View, StyleSheet, Button } from 'react-native'
+import { View, StyleSheet } from 'react-native'
 import { McText, McButton } from 'Components'
 import React from 'react'
 import { useTheme } from 'styled-components'
 
+
 const styles = StyleSheet.create({
     container: {
-        flex: 1,
         justifyContent: 'center',
         alignItems: 'center',
         padding: 44,
+        flex: 1,
+
     },
     title: {
         textAlign: 'center',

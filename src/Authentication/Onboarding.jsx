@@ -2,15 +2,14 @@ import { View, Text, StyleSheet, Dimensions } from "react-native";
 import React, { useRef } from "react";
 import { ScrollView } from "react-native-gesture-handler";
 import { Slide } from "Authentication/shared";
-import Animated, { multiply } from "react-native-reanimated";
+import Animated, { multiply, divide } from "react-native-reanimated";
 import {
-  useValue,
-  onScrollEvent,
   interpolateColor,
-} from "react-native-redash/lib/module/v1";
+  useScrollHandler,
+} from "react-native-redash";
 import { useTheme } from "styled-components";
 import { Slides } from "Mock";
-import { Subslide } from "Authentication/shared";
+import { Subslide, Dot } from "Authentication/shared";
 
 const { width, height } = Dimensions.get("window");
 const styles = StyleSheet.create({
@@ -22,13 +21,19 @@ const styles = StyleSheet.create({
     height: 0.61 * height,
     borderBottomRightRadius: 75,
   },
+  pagination: {
+    ...StyleSheet.absoluteFillObject,
+    height: 75,
+    flexDirection: 'row',
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
   footer: {
     flex: 1,
   },
   footerContent: {
     backgroundColor: "white",
     borderTopLeftRadius: 75,
-    flexDirection: "row",
     flex: 1,
   },
 });
@@ -36,8 +41,7 @@ const styles = StyleSheet.create({
 const Onboarding = () => {
   const scroll = useRef(null);
   const theme = useTheme();
-  const x = useValue(0);
-  const onScroll = onScrollEvent({ x });
+  const { scrollHandler, x } = useScrollHandler();
   const backgroundColor = interpolateColor(x, {
     inputRange: Slides.map((_, i) => i * width),
     outputRange: Slides.map((slide) => slide.color),
@@ -53,11 +57,10 @@ const Onboarding = () => {
           decelerationRate={`fast`}
           showsHorizontalScrollIndicator={false}
           bounces={false}
-          scrollEventThrottle={1}
-          {...{ onScroll }}
+          {...scrollHandler}
         >
-          {Slides.map(({ title }, index) => (
-            <Slide key={index} rightSide={!!(index % 2)} {...{ title }} />
+          {Slides.map(({ title, image }, index) => (
+            <Slide key={index} rightSide={!!(index % 2)} {...{ title, image }} />
           ))}
         </Animated.ScrollView>
       </Animated.View>
@@ -68,33 +71,46 @@ const Onboarding = () => {
             backgroundColor,
           }}
         />
-        <Animated.View
-          style={[
-            styles.footerContent,
-            {
-              width: width * Slides.length,
-              flex: 1,
-              transform: [
-                {
-                  translateX: multiply(x, -1),
-                },
-              ],
-            },
-          ]}
+        <View
+          style={ styles.footerContent }
         >
-          {Slides.map(({ content: { title, description } }, index) => (
-            <Subslide
-              key={index}
-              last={index === Slides.length - 1}
-              {...{ title, description }}
-              onPress={() => {
-                  if(scroll.current) {
-                      scroll.current.scrollTo({ x: width * (index + 1), animated: true})
-                  }
-              }}
-            />
-          ))}
-        </Animated.View>
+          <View style={styles.pagination}>
+            {Slides.map((_, index) => (
+              <Dot
+                key={index+1}
+                currentIndex={divide(x, width)}
+                index = { index }
+              />
+            ))}
+          </View>
+            <Animated.View style={{
+                flex: 1,
+                flexDirection: 'row',
+                width: width * Slides.length,
+                transform: [
+                    {
+                    translateX: multiply(x, -1),
+                    },
+                ],
+            }}> 
+
+                {Slides.map(({ content: { title, description } }, index) => (
+                    <Subslide
+                    key={index}
+                    last={index === Slides.length - 1}
+                    {...{ title, description }}
+                    onPress={() => {
+                        if (scroll.current) {
+                        scroll.current.getNode().scrollTo({
+                            x: width * (index + 1),
+                            animated: true,
+                        });
+                        }
+                    }}
+                    />
+                ))}
+            </Animated.View>
+        </View>
       </View>
     </View>
   );

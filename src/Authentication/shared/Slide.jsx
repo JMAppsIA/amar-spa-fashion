@@ -1,12 +1,13 @@
 import { View, Text, Dimensions, StyleSheet } from 'react-native'
 import React from 'react'
-import { McText } from 'Components'
+import { McText, McImage } from 'Components'
 import { useTheme } from 'styled-components/native'
 
 const { width, height } = Dimensions.get('window');
 const styles = StyleSheet.create({
   container: {
     width,
+    overflow: 'hidden'
   },
   titleContainer: {
     height: 100,
@@ -15,9 +16,20 @@ const styles = StyleSheet.create({
   title: {
     textAlign: 'center',
     lineHeight: 80
+  },
+  underlay: {
+    ...StyleSheet.absoluteFillObject,
+    justifyContent: 'flex-end',
+  },
+  image: {
+    ...StyleSheet.absoluteFillObject,
+    width: undefined,
+    height: undefined,
+    borderBottomRightRadius: 75,
+    justifyContent: 'center'
   }
 })
-const Slide = ({title, rightSide}) => {
+const Slide = ({title, rightSide, image}) => {
   const theme = useTheme()
   const transform = [
     { translateY: (0.61 * height - 100 ) / 2},
@@ -26,6 +38,9 @@ const Slide = ({title, rightSide}) => {
   ]
   return (
     <View style={ styles.container }>
+      <View style={styles.underlay}>
+        <McImage source={image} style={styles.image}/>
+      </View>
       <View style={ [styles.titleContainer, { transform }] }>
         <McText semi size={65} color={theme.colors.boxBackground} style={styles.title}>{title}</McText>
       </View>

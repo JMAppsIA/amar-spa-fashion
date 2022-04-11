@@ -17,6 +17,7 @@ const Dark = {
         text3: '#7B7F9E',
         boxBackground: '#212330',
         primaryBackground: '#B8E8D1',
+        slideTwoBackground: '#EFFEF1',
         secondaryBackground: '#BFEAF5',
         thirdBackground: '#8D492F',
         fourthBackground: '#FFE4D9',

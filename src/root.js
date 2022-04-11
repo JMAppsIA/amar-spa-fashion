@@ -4,7 +4,7 @@ import * as Font from 'expo-font';
 import { Fonts } from 'Constants';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
-import { Onboarding } from 'Authentication';
+import { Onboarding, Welcome } from 'Authentication';
 import ThemeManager from './Themes';
 
 const AuthenticationStack = createStackNavigator();
@@ -14,6 +14,7 @@ const AuthenticationNavigator = () => {
             headerShown: false
         }}>
             <AuthenticationStack.Screen name="OnBoarding" component={ Onboarding } />
+            <AuthenticationStack.Screen name="Welcome" component={ Welcome } />
         </AuthenticationStack.Navigator>
     );
 };
