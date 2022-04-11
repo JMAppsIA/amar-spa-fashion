@@ -1,15 +1,15 @@
-import { View, Text, StyleSheet, Dimensions } from "react-native";
+import { View, StyleSheet, Dimensions } from "react-native";
 import React, { useRef } from "react";
-import { ScrollView } from "react-native-gesture-handler";
-import { Slide } from "Authentication/shared";
-import Animated, { multiply, divide } from "react-native-reanimated";
+import Animated, { interpolate, multiply, divide, Extrapolate } from "react-native-reanimated";
 import {
   interpolateColor,
   useScrollHandler,
 } from "react-native-redash";
 import { useTheme } from "styled-components";
+import { Slide } from "Authentication/shared";
 import { Slides } from "Mock";
 import { Subslide, Dot } from "Authentication/shared";
+import { McImage } from 'Components';
 
 const { width, height } = Dimensions.get("window");
 const styles = StyleSheet.create({
@@ -36,9 +36,16 @@ const styles = StyleSheet.create({
     borderTopLeftRadius: 75,
     flex: 1,
   },
+  underlay: {
+    ...StyleSheet.absoluteFillObject,
+    alignItems: 'center',
+    justifyContent: "flex-end",
+    borderBottomRightRadius: 75,
+    overflow: 'hidden',
+  },
 });
 
-const Onboarding = () => {
+const Onboarding = ({navigation}) => {
   const scroll = useRef(null);
   const theme = useTheme();
   const { scrollHandler, x } = useScrollHandler();
@@ -50,6 +57,24 @@ const Onboarding = () => {
   return (
     <View style={styles.container}>
       <Animated.View style={[styles.slider, { backgroundColor }]}>
+       { Slides.map(({image}, index) => {
+          const opacity = interpolate(x, {
+            inputRange: [(index-0.5)*width, index*width, (index+0.5)*width],
+            outputRange: [0, 1, 0],
+            extrapolate: Extrapolate.CLAMP,
+          })
+          return (
+            <Animated.View key={index} style={[styles.underlay, { opacity }]}>
+              <McImage
+                source={image.src}
+                style={{ 
+                  width: width - 75,
+                  height: ( (width - 75) * image.height ) / image.width,
+                }}
+              />
+            </Animated.View>
+          );
+        })}
         <Animated.ScrollView
           ref={scroll}
           horizontal
@@ -94,21 +119,25 @@ const Onboarding = () => {
                 ],
             }}> 
 
-                {Slides.map(({ content: { title, description } }, index) => (
+                {Slides.map(({ content: { title, description } }, index) => {
+                  const last = index === Slides.length -1;
+                  return (
                     <Subslide
                     key={index}
-                    last={index === Slides.length - 1}
-                    {...{ title, description }}
+                    {...{ title, description, last }}
                     onPress={() => {
-                        if (scroll.current) {
-                        scroll.current.getNode().scrollTo({
+                        if (last) {
+                          navigation.navigate('Welcome')
+                        } else if (scroll.current) {
+                        scroll.current?.getNode().scrollTo({
                             x: width * (index + 1),
                             animated: true,
                         });
                         }
                     }}
                     />
-                ))}
+                )
+                })}
             </Animated.View>
         </View>
       </View>

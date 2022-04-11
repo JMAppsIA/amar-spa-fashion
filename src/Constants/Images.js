@@ -43,7 +43,8 @@
  const backgroundFive = require('Assets/images/background5.jpeg');
  const backgroundSix = require('Assets/images/background6.jpeg');
  const backgroundSeven = require('Assets/images/background7.webp');
-
+ const backgroundEight = require('Assets/images/background8.png');
+ const backgroundNine = require('Assets/images/background9.jpeg');
 
  const close = require('Assets/images/icons/close.png');
  const color_bar = require('Assets/images/color_bar.png');
@@ -51,6 +52,9 @@
  const right_arrow = require('Assets/images/icons/right_arrow.png');
  const log_out = require('Assets/images/icons/logout.png');
  const cloud = require('Assets/images/icons/cloud.png');
+ const google = require('Assets/images/icons/google.png');
+ const facebook = require('Assets/images/icons/facebook.png');
+ const apple = require('Assets/images/icons/apple.png');
  
  /**
   * export the images object
@@ -89,6 +93,11 @@
      notVerified,
      visa,
      masterCard,
-     americanExpress
+     americanExpress,
+     backgroundEight,
+     backgroundNine,
+     google,
+     facebook,
+     apple,
  };
  

@@ -4,8 +4,10 @@ import * as Font from 'expo-font';
 import { Fonts } from 'Constants';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
-import { Onboarding, Welcome } from 'Authentication';
+import { Onboarding, Welcome, Login } from 'Authentication';
+
 import ThemeManager from './Themes';
+import { SafeAreaProvider } from 'react-native-safe-area-context';
 
 const AuthenticationStack = createStackNavigator();
 const AuthenticationNavigator = () => {
@@ -14,7 +16,12 @@ const AuthenticationNavigator = () => {
             headerShown: false
         }}>
             <AuthenticationStack.Screen name="OnBoarding" component={ Onboarding } />
-            <AuthenticationStack.Screen name="Welcome" component={ Welcome } />
+            <AuthenticationStack.Screen name="Welcome" component={ Welcome } options={{
+                gestureEnabled: false,
+            }}/>
+            <AuthenticationStack.Screen name="Login" component={ Login } options={{
+                gestureEnabled: false,
+            }}/>
         </AuthenticationStack.Navigator>
     );
 };
@@ -33,11 +40,13 @@ const App = ({ params }) => {
     });
 
     return assetsLoaded ? (
-        <ThemeManager>
-            <NavigationContainer>
-                <AuthenticationNavigator />
-            </NavigationContainer>
-        </ThemeManager>
+            <ThemeManager>
+                <NavigationContainer>
+                    <SafeAreaProvider>
+                        <AuthenticationNavigator />
+                    </SafeAreaProvider>
+                </NavigationContainer>
+            </ThemeManager>
     ) : (
         <ActivityIndicator size="small"></ActivityIndicator>
     );

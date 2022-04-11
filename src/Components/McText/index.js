@@ -8,7 +8,13 @@ const McText = styled.Text`
   font-size: ${(props) => props.size || Metrics.s16}px;
   /* default left */
   text-align: ${(props) => props.align || "left"};
-
+  ${({uppercase}) => {
+    switch(true) {
+      case uppercase: {
+        return { textTransform: 'uppercase'}
+      }
+    }
+  }}
   ${({
     black,
     blackItalic,

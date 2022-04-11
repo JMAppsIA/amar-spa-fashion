@@ -17,7 +17,7 @@ const Colors = {
     info: '#17A2B8',
     disabled: 'hsl(208, 8%, 90%)',
     default: '#6C757D',
-
+    lightBlack: '#0C0D34',
     black: '#000000',
     white: '#FFFFFF',
 
