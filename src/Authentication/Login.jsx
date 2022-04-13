@@ -7,6 +7,7 @@ import { McCheckBox, TextInput } from "AuthFormComponents";
 import { useFormik } from "formik";
 import { LoginInitialValues } from "FormikManager/InitialValues";
 import { LoginValidator } from "FormikManager/Validators";
+import { BorderlessButton } from "react-native-gesture-handler";
 const Login = ({ navigation }) => {
   const theme = useTheme();
   const footer = (
@@ -26,7 +27,7 @@ const Login = ({ navigation }) => {
   } = useFormik({
     validationSchema: LoginValidator,
           initialValues: LoginInitialValues,
-          onSubmit: (values) => console.log(values)
+          onSubmit: () => navigation.navigate('Home')
   });
 
   return (
@@ -83,14 +84,16 @@ const Login = ({ navigation }) => {
                 style={{
                   flexDirection: "row",
                   justifyContent: "space-between",
+                  alignItems: 'center',
+                  marginVertical: 10,
                 }}
               >
                 <McCheckBox label="Recuerdame" checked={values.rememberUser} onChange={() => setFieldValue('rememberUser', !values.rememberUser)}/>
-                <McButton transparent onPress={() => navigation.navigate('ForgotPassword')}>
-                  <McText regular color={theme.colors.primaryBackground}>
+                <BorderlessButton transparent onPress={() => navigation.navigate('ForgotPassword')}>
+                  <McText semi color={theme.colors.primaryBackground}>
                     Olvidé mi contraseña
                   </McText>
-                </McButton>
+                </BorderlessButton>
               </View>
               <View style={{ alignItems: "center", marginTop: 10 }}>
                 <McButton primary onPress={handleSubmit}>

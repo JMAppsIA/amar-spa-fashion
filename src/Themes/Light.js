@@ -17,13 +17,14 @@ const Light = {
         text2: '#3A4276',
         text3: '#32463D',
         boxBackground: '#F1F3F6',
-        primaryBackground: '#B8E8D1',
+        primaryBackground: '#22818B',
         slideTwoBackground: '#EFFEF1',
         secondaryBackground: '#BFEAF5',
         thirdBackground: '#8D492F',
         fourthBackground: '#FFE4D9',
         iconBackground: '#000000',
         pristineInput: '#8A8D90',
+        grey2: '#0C0D34',
     },
 };
 

@@ -3,5 +3,6 @@ import Welcome from "./Welcome/Welcome";
 import Login from "./Login";
 import Signup from "./Signup";
 import ForgotPassword from "./ForgotPassword";
-
-export { Onboarding, Welcome, Login, Signup, ForgotPassword };
+import PasswordChanged
+ from "./PasswordChanged";
+export { Onboarding, Welcome, Login, Signup, ForgotPassword, PasswordChanged };

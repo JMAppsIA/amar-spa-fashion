@@ -3,12 +3,12 @@ import React from 'react'
 import { Ionicons, AntDesign } from "@expo/vector-icons";
 import { useTheme } from 'styled-components';
 import { McText } from 'Components';
-import { RectButton } from 'react-native-gesture-handler';
+import { BorderlessButton } from 'react-native-gesture-handler';
 
 const McCheckBox = ({label, checked, onChange}) => {
   const theme = useTheme();
   return (
-      <RectButton onPress={() => onChange()} style={{justifyContent: 'center'}}>
+      <BorderlessButton onPress={() => onChange()} style={{justifyContent: 'center'}}>
         <View style={{
             flexDirection: 'row',
             alignItems: 'center',
@@ -21,14 +21,14 @@ const McCheckBox = ({label, checked, onChange}) => {
                 justifyContent: 'center',
                 alignItems: 'center',
                 borderWidth: 1,
-                borderColor: theme.colors.primaryBackground,
-                backgroundColor: checked? theme.colors.primaryBackground : theme.colors.white
+                borderColor: theme.colors.success,
+                backgroundColor: checked? theme.colors.success : theme.colors.white
             }}>
                 <AntDesign name='check' color='white'/>
             </View>
             <McText align={`center`}>{label}</McText>
         </View>
-      </RectButton>
+      </BorderlessButton>
   )
 };
 

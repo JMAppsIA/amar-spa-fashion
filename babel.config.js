@@ -18,7 +18,8 @@ module.exports = function(api) {
             Screens: './src/Screens',
             Mock: './src/Mock',
             FormikManager: './src/FormikManager',
-            AuthFormComponents: './src/Authentication/components/Form'
+            AuthFormComponents: './src/Authentication/components/Form',
+            Home: './src/Home'
           },
         },
       ],

@@ -10,7 +10,7 @@ import { useTheme } from 'styled-components';
 
 
 
-const ForgotPassword = () => {
+const ForgotPassword = ({ navigation }) => {
 
   const theme = useTheme();
 
@@ -23,7 +23,7 @@ const ForgotPassword = () => {
   } = useFormik({
     validationSchema: ForgotPasswordValidator,
           initialValues: ForgotPasswordInitialValues,
-          onSubmit: (values) => console.log(values)
+          onSubmit: () => navigation.navigate('PasswordChanged')
   });
 
   const footer = (
