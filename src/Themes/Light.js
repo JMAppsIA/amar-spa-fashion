@@ -10,6 +10,7 @@ const Light = {
         primary: '#22818B',
         secondary: '#F1F3F6',
         grey: '#9d9fa3',
+        lightGray: '#D3D3D3',
         success: '#38C2B7',
         error: '#E14161',
         text1: '#1B1D28',
@@ -21,7 +22,8 @@ const Light = {
         secondaryBackground: '#BFEAF5',
         thirdBackground: '#8D492F',
         fourthBackground: '#FFE4D9',
-        iconBackground: '#000000'
+        iconBackground: '#000000',
+        pristineInput: '#8A8D90',
     },
 };
 

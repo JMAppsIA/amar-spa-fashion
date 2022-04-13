@@ -10,6 +10,7 @@ const Dark = {
         primary: '#22818B',
         secondary: '#03DAC5',
         grey: '#9d9fa3',
+        lightGray: '#D3D3D3',
         success: '#38C2B7',
         error: '#E14161',
         text1: '#FFFFFF',
@@ -22,6 +23,7 @@ const Dark = {
         thirdBackground: '#8D492F',
         fourthBackground: '#FFE4D9',
         iconBackground: '#FFFFFF',
+        pristineInput: '#8A8D90',
     },
 };
 

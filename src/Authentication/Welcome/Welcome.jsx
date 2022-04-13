@@ -1,4 +1,4 @@
-import { View, Text, Dimensions, StyleSheet } from 'react-native'
+import { View, Dimensions } from 'react-native'
 import React from 'react'
 import { useTheme } from 'styled-components'
 import { Slides } from 'Mock';
