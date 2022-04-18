@@ -1,37 +1,41 @@
-import { View, TextInput as RNTextInput } from 'react-native'
-import React, { forwardRef, useState } from 'react'
-import {Ionicons, AntDesign } from "@expo/vector-icons";
+import { View, TextInput as RNTextInput, StyleSheet } from 'react-native'
+import React, { forwardRef } from 'react'
+import {Ionicons } from "@expo/vector-icons";
 import { useTheme } from 'styled-components';
+import RoundedIcon from '../../../Components/shared/RoundedIconButton/RoundedIcon';
+import { Metrics } from 'Constants';
 
 const TextInput = forwardRef(({placeholder, icon, error, touched, ...props}, ref) => {
   const theme = useTheme();
   const color = !touched? theme.colors.lightGray : (error? theme.colors.error : theme.colors.success);
+  const SIZE = Metrics.rad.medium * 2;  
 
   return (
     <View style={{
         flexDirection: 'row',
         alignItems: 'center',
         height: 48,
-        borderRadius: 10,
+        borderRadius: Metrics.rad.small,
         borderColor: color,
-        borderWidth: 1,
+        borderWidth: StyleSheet.hairlineWidth,
+        padding: Metrics.rad.small
     }}>
         <View style={{
-            padding: 10,
+            padding: Metrics.rad.small,
         }}>
             <Ionicons
                 name={icon}
                 size={16}
-                style={{
-                marginLeft: 20,
-                }}
+                // style={{
+                // marginLeft: 20,
+                // }}
                 color={color}
             />
         </View>
         <View style={{
             flex: 1,
         }}>
-            <RNTextInput 
+          <RNTextInput 
             underlineColorAndroid='transparent' 
             placeholder={placeholder}
             placeholderTextColor={color}
@@ -40,17 +44,13 @@ const TextInput = forwardRef(({placeholder, icon, error, touched, ...props}, ref
         </View>
         {
             touched && (
-                <View style={{
-                    height: 20,
-                    width: 20,
-                    borderRadius: 20,
-                    marginRight: 5,
-                    backgroundColor: !error ? theme.colors.success: theme.colors.error,
-                    alignItems: 'center',
-                    justifyContent: 'center',
-                }}>
-                    <AntDesign name={!error ? 'check': 'close'} color={theme.colors.white}/>
-                </View>
+                <RoundedIcon 
+                    name={!error ? 'check' : 'close'}
+                    size={SIZE}
+                    backgroundColor={!error ? theme.colors.success : theme.colors.error}
+                    color={theme.colors.white}
+                    align='center'
+                />
             )
         }
     </View>

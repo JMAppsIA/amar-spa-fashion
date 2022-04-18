@@ -19,7 +19,8 @@ module.exports = function(api) {
             Mock: './src/Mock',
             FormikManager: './src/FormikManager',
             AuthFormComponents: './src/Authentication/components/Form',
-            Home: './src/Home'
+            Home: './src/Home',
+            Hooks: './src/Hooks',
           },
         },
       ],

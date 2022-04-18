@@ -2,141 +2,90 @@ import { View } from "react-native";
 import React, { useRef } from "react";
 import { useTheme } from "styled-components";
 import { McText, McButton } from "Components";
-import { Container, Footer } from "Components/shared";
-import { TextInput } from "AuthFormComponents";
+import { Container } from "Components/shared";
 import { useFormik } from "formik";
 import { SignupInitialValues } from "FormikManager/InitialValues";
 import { SignupValidator } from "FormikManager/Validators";
-const Signup = ({ navigation }) => {
+import { Metrics } from "Constants";
+import { Footer } from 'Authentication/components';
+import { TextInput } from "AuthFormComponents";
+
+
+const Signup = ({ navigation }) => {
   const theme = useTheme();
-  const footer = (
-    <Footer title='Ya tienes una cuenta?' action='Ingresa aqui' onPress={() => navigation.navigate('Login')}/>
-  );
-
-  const email = useRef(null);
-  const password = useRef(null);
-  const passwordConfirmation = useRef(null);
-
-  const {
-    handleChange,
-    handleBlur,
-    handleSubmit,
-    errors,
-    touched,
-  } = useFormik({
+  const { 
+    handleChange, handleBlur, handleSubmit,
+    errors, touched 
+} = useFormik({
     validationSchema: SignupValidator,
-          initialValues: SignupInitialValues,
-          onSubmit: (values) => console.log(values)
-  });
+    initialValues: SignupInitialValues,
+    onSubmit: () => navigation.navigate('Home')
+});
+  const password = useRef(null);
+    const confirmPassword = useRef(null);
+    const footer = <Footer title="Already have an account?" action="Login here" onPress={() => navigation.navigate('Login')} />
 
-  return (
-    <Container {...{ footer }}>
-      <View
-        style={{
-          padding: 50,
-        }}
-      >
-        <McText semi size={28} align={`center`} style={{ marginBottom: 10 }}>
-          Registro 🤓 
-        </McText>
-        <McText regular size={16} align={`center`} style={{ marginBottom: 20 }}>
-          Ingresa tus datos para crear tu cuenta ! 🎉 
-        </McText>
-              <View
-                style={{
-                  marginBottom: 10,
-                }}
-              >
-                <TextInput
-                  icon="person"
-                  placeholder={`Cómo te llamas?`}
-                  placeholderTextColor={`#151624`}
-                  onChangeText={handleChange("fullName")}
-                  onBlur={handleBlur("fullName")}
-                  error={errors.fullName}
-                  touched={touched.fullName}
-                  autoCompleteType='name'
-                  autoCapitalize='none'
-                  returnKeyType='next'
-                  returnKeyLabel='next'
-                  onSubmitEditing={() => email?.current.focus()}
+    return (
+        <Container pattern={1} {...{footer}}>
+            <McText title1 align="center" style={{marginBottom: Metrics.spacing.large}}>Create account</McText>
+            <McText body align="center" style={{marginBottom: Metrics.spacing.large}}>
+                Let us know your email and password.
+            </McText>
+            <View>
+                <View style={{marginBottom: Metrics.spacing.medium}}>
+                    <TextInput 
+                        icon="mail" 
+                        placeholder="Enter your email"
+                        onChangeText={handleChange('email')}
+                        onBlur={handleBlur('email')} 
+                        error={errors.email}
+                        touched={touched.email}
+                        autoCompleteType="email"
+                        returnKeyType="next"
+                        returnKeyLabel="next"
+                        onSubmitEditing={() => password.current?.focus()}
+                    />
+                </View>
+                <View style={{marginBottom: Metrics.spacing.medium}}>
+                    <TextInput 
+                        ref={password}
+                        icon="key" 
+                        placeholder="Enter your password" 
+                        onChangeText={handleChange('password')}
+                        onBlur={handleBlur('password')}
+                        error={errors.password}
+                        touched={touched.password}
+                        autoCompleteType="password"
+                        autoCapitalize="none"
+                        returnKeyType="next"
+                        returnKeyLabel="next"
+                        onSubmitEditing={() => confirmPassword.current?.focus()}
+                        secureTextEntry
+                    />
+                </View>
+                <TextInput 
+                    ref={confirmPassword}
+                    icon="key" 
+                    placeholder="Confirm your password" 
+                    onChangeText={handleChange('confirmPassword')}
+                    onBlur={handleBlur('confirmPassword')}
+                    error={errors.confirmPassword}
+                    touched={touched.confirmPassword}
+                    autoCompleteType="password"
+                    autoCapitalize="none"
+                    returnKeyType="go"
+                    returnKeyLabel="go"
+                    onSubmitEditing={() => handleSubmit()}
+                    secureTextEntry
                 />
-              </View>
-              <View
-                style={{
-                  marginBottom: 10,
-                }}
-              >
-                <TextInput
-                  icon="mail"
-                  placeholder={`Ingresa tu correo electrónico`}
-                  placeholderTextColor={`#151624`}
-                  onChangeText={handleChange("email")}
-                  onBlur={handleBlur("email")}
-                  error={errors.email}
-                  touched={touched.email}
-                  autoCompleteType='email'
-                  autoCapitalize='none'
-                  returnKeyType='next'
-                  returnKeyLabel='next'
-                  onSubmitEditing={() => password?.current.focus()}
-                />
-              </View>
-              <View
-                style={{
-                  marginBottom: 10,
-                }}
-              >
-                <TextInput
-                  ref={password}
-                  icon="key"
-                  placeholder={`Ingresa tu contraseña`}
-                  placeholderTextColor={`#151624`}
-                  onChangeText={handleChange("password")}
-                  onBlur={handleBlur("password")}
-                  error={errors.password}
-                  touched={touched.password}
-                  autoCompleteType='password'
-                  autoCapitalize='none'
-                  returnKeyType='next'
-                  returnKeyLabel='next'
-                  onSubmitEditing={() => passwordConfirmation?.current.focus()}
-                  secureTextEntry
-                />
-              </View>
-              <View
-                style={{
-                  marginBottom: 10,
-                }}
-              >
-                <TextInput
-                  ref={passwordConfirmation}
-                  icon="key"
-                  placeholder={`Confirma tu contraseña`}
-                  placeholderTextColor={`#151624`}
-                  onChangeText={handleChange("passwordConfirmation")}
-                  onBlur={handleBlur("passwordConfirmation")}
-                  error={errors.passwordConfirmation}
-                  touched={touched.passwordConfirmation}
-                  autoCompleteType='password'
-                  autoCapitalize='none'
-                  returnKeyType='go'
-                  returnKeyLabel='go'
-                  onSubmitEditing={() => handleSubmit()}
-                  secureTextEntry
-                />
-              </View>
-              <View style={{ alignItems: "center", marginTop: 10 }}>
-                <McButton primary onPress={handleSubmit}>
-                  <McText regular color={theme.colors.white} align={`center`}>
-                    Crear a mi cuenta
-                  </McText>
-                </McButton>
-              </View>
-            
-      </View>
-    </Container>
-  );
+                <View style={{ alignItems: 'center', marginTop: Metrics.spacing.medium}}>
+                    <McButton primary onPress={handleSubmit}>
+                      <McText semi color={theme.colors.white} align='center'>Create your account</McText>
+                    </McButton>
+                </View>
+            </View>
+        </Container>
+    )
 };
 
 export default Signup;

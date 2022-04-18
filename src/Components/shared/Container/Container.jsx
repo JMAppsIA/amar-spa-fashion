@@ -1,82 +1,82 @@
-import { View, Text, StyleSheet, Dimensions, Platform } from 'react-native'
-import React from 'react'
-import { useTheme } from 'styled-components' 
-import { McImage } from 'Components';
-import { Images, Colors } from 'Constants';
-import { useSafeAreaInsets } from 'react-native-safe-area-context';
+import React, { ReactNode } from "react";
+import { Dimensions, StyleSheet, Platform, View } from "react-native";
+import { useSafeAreaInsets } from "react-native-safe-area-context";
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
-import Constants from 'expo-constants'
+import Constants from "expo-constants";
+import { Images, Metrics } from 'Constants';
+import { useTheme } from "styled-components";
+import { McImage } from 'Components';
 
 const { width, height: wHeight } = Dimensions.get('window');
-const aspectRadio = 750 / 1125;
-const height = width * aspectRadio;
+const aspectRatio = 1023 / 1535;
+const height = width * aspectRatio;
 
-const styles = StyleSheet.create({
-    container: {
-      height: wHeight + (Platform.OS === 'android' ? Constants.statusBarHeight: 0),
-    },
-    header: {
-      borderBottomLeftRadius: 75,
-      overflow: 'hidden',
-      height: height*0.61,
-    },
-    headerImage: {
-      width,
-      height,
-      borderBottomLeftRadius: 75,
-    },
-    body: {
-      flex: 1,
-      overflow: 'hidden',
-    },
-    bodyImage: {
-      ...StyleSheet.absoluteFillObject,
-      width,
-      height,
-      top: -height*0.61
-    },
-    bodyContent: {
-      flex: 1,
-      borderRadius: 75,
-      borderTopLeftRadius: 0,
-    },
-    footer: {
-      height: height/2,
-      paddingTop: 30,
-    }
-})
+const Container = ({ children, footer, pattern }) => {
+  
+    const insets = useSafeAreaInsets();
+    const theme = useTheme();
+    const asset = pattern === 1 ? Images.backgroundPatternOne : pattern===2 ? Images.backgroundPatternTwo : Images.backgroundPatternThree;
 
-
-const Container = ({ children, footer }) => {
-  const insets = useSafeAreaInsets();
-  const theme = useTheme();
-  return (
-    <KeyboardAwareScrollView scrollEnabled={false}>
-      <View style={[styles.container, {backgroundColor: Colors.lightBlack}]}>
-        <View style={{backgroundColor: theme.colors.boxBackground}}>
-          <View style={styles.header}>
-              <McImage 
-              source={Images.backgroundNine}
-              style={styles.headerImage}
-              />
-          </View>
-        </View>
-        <View style={styles.body}>
-            <McImage 
-            source={Images.backgroundNine}
-            style={styles.bodyImage}
-            />
-            <View style={[styles.bodyContent, {backgroundColor: theme.colors.boxBackground}]}>
-                {children}
+    return (
+        <KeyboardAwareScrollView scrollEnabled={false}>
+            <View 
+              style={{
+                height: wHeight + (Platform.OS === "android" ? Constants.statusBarHeight : 0),
+                backgroundColor: theme.colors.grey2,
+              }}
+            >
+                <View 
+                  style={{
+                    backgroundColor: theme.colors.boxBackground,
+                  }}
+                >
+                    <View 
+                      style={{
+                        borderBottomLeftRadius: Metrics.rad.xlarge, 
+                        overflow: 'hidden', 
+                        height: height * 0.61,
+                      }}
+                    > 
+                        <McImage 
+                            source={asset} 
+                            style={{ width, height, borderBottomLeftRadius: Metrics.rad.xlarge }}
+                        />
+                    </View>
+                </View>
+                <View 
+                  style={{
+                    flex: 1,
+                    overflow: 'hidden',
+                  }}
+                >
+                    <McImage 
+                        source={asset} 
+                        style={{ ...StyleSheet.absoluteFillObject, width, height, top: -height * 0.61 }}
+                    />
+                    <View
+                        style={{
+                          flex: 1, 
+                          borderRadius: Metrics.rad.xlarge, 
+                          backgroundColor: theme.colors.boxBackground, 
+                          justifyContent: 'center',
+                          padding: Metrics.rad.xlarge,
+                        }} 
+                    >
+                        {children}
+                    </View>
+                </View>
+                <View 
+                  style={{
+                    backgroundColor: theme.colors.grey2, 
+                    paddingTop: Metrics.rad.medium
+                  }}
+                >
+                    {footer}    
+                    <View height={Math.max(insets.bottom, 16)} />
+                </View>
             </View>
-        </View>
-        <View style={[styles.footer, { backgroundColor: Colors.lightBlack }]}>
-          { footer }
-          <View style={{ paddingBottom: insets.bottom}}/>
-        </View>
-      </View>
-    </KeyboardAwareScrollView>
-  )
-}
+        </KeyboardAwareScrollView>
+    );
+};
 
-export default Container
+export default Container;

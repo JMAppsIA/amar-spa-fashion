@@ -28,12 +28,13 @@ const Metrics = {
     h4: 16,
     h5: 14,
     h6: 13,
-    body1: 30,
-    body2: 22,
-    body3: 16,
-    body4: 14,
-    body5: 13,
-    body6: 12,
+    title1: 28,
+    title2: 24,
+    title3: 16,
+    hero: 80,
+    body: 16,
+    header: 12,
+    button: 15,
 
     borderWidth: 0.4,
 
@@ -60,6 +61,19 @@ const Metrics = {
         large: 60,
         logo: 200,
     },
+
+    spacing: {
+        small: 8,
+        medium: 16,
+        large: 24,
+        xlarge: 40,
+    },
+    rad: {
+        small: 4,
+        medium: 10,
+        large: 25,
+        xlarge: 75,
+      }
 };
 
 export default Metrics;

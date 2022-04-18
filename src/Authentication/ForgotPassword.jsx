@@ -1,14 +1,14 @@
 import { View, Text, Linking } from 'react-native'
 import React from 'react'
-import { Container, Footer } from "Components/shared";
+import { Container } from "Components/shared";
 import { useFormik } from "formik";
 import { ForgotPasswordInitialValues } from "FormikManager/InitialValues";
 import { ForgotPasswordValidator } from "FormikManager/Validators";
 import { McText, McButton } from 'Components';
 import { TextInput } from "AuthFormComponents";
 import { useTheme } from 'styled-components';
-
-
+import { Metrics } from 'Constants';
+import { Footer } from 'Authentication/components';
 
 const ForgotPassword = ({ navigation }) => {
 
@@ -26,57 +26,48 @@ const ForgotPassword = ({ navigation }) => {
           onSubmit: () => navigation.navigate('PasswordChanged')
   });
 
-  const footer = (
-    <Footer title='No funcionó?' action='Prueba otra forma' onPress={() => Linking.openURL('mailto:support@amarspa.pe')}/>
-  );
+  const footer = 
+        <Footer 
+            title="Not working?" 
+            action="Try another way" 
+            onPress={() => Linking.openURL("mailto:help@support.com")} 
+        />
 
-  return (
-    <Container {...{ footer }}>
-      <View
-        style={{
-          padding: 50,
-          flex: 1,
-          justifyContent: 'center',
-        }}
-      >
-        <McText semi size={28} align={`center`} style={{ marginBottom: 10 }}>
-          Olvidaste tu contraseña?
-        </McText>
-        <McText regular size={16} align={`center`} style={{ marginBottom: 20 }}>
-          Ingresa el correo asociado a tu cuenta  
-        </McText>
+    return(
+        <Container pattern={2} {...{ footer }}>
+            <McText title1 align="center" style={{marginBottom: Metrics.spacing.large}}>Forgot Password?</McText>
+            <McText body align="center" style={{marginBottom: Metrics.spacing.large}}>
+                Enter the email address associated with your account.
+            </McText>
+            <View>
+                <View style={{marginBottom: Metrics.spacing.medium}}>
+                    <TextInput 
+                        icon="mail" 
+                        placeholder="Enter your email"
+                        onChangeText={handleChange('email')}
+                        onBlur={handleBlur('email')} 
+                        error={errors.email}
+                        touched={touched.email}
+                        autoCompleteType="email"
+                        returnKeyType="go"
+                        returnKeyLabel="go"
+                        onSubmitEditing={() => handleSubmit()}
+                    />
+                </View>
+                <View 
+                  style={{
+                    alignItems: 'center', 
+                    marginTop: Metrics.spacing.medium
 
-              <View
-                style={{
-                  marginBottom: 10,
-                }}
-              >
-                <TextInput
-                  icon="mail"
-                  placeholder={`Ingresa tu correo electrónico`}
-                  placeholderTextColor={`#151624`}
-                  onChangeText={handleChange("email")}
-                  onBlur={handleBlur("email")}
-                  error={errors.email}
-                  touched={touched.email}
-                  autoCompleteType='email'
-                  autoCapitalize='none'
-                  returnKeyType='go'
-                  returnKeyLabel='go'
-                  onSubmitEditing={() => handleSubmit()}
-                />
-              </View>
-              <View style={{ alignItems: "center", marginTop: 10 }}>
-                <McButton primary onPress={handleSubmit}>
-                  <McText regular color={theme.colors.white} align={`center`}>
-                    Ingresar a mi cuenta
-                  </McText>
-                </McButton>
-              </View>
-            
-      </View>
-    </Container>
-  )
+                  }}
+                >
+                    <McButton primary onPress={handleSubmit} >
+                      <McText regular align='center' color={theme.colors.white}>Reset Password</McText>
+                    </McButton>
+                </View>
+            </View>
+        </Container>
+    )
 }
 
 export default ForgotPassword

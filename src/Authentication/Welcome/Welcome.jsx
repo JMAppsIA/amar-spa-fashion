@@ -1,72 +1,97 @@
-import { View, Dimensions } from 'react-native'
-import React from 'react'
-import { useTheme } from 'styled-components'
-import { Slides } from 'Mock';
+import React from 'react';
+import { View, Dimensions } from 'react-native';
+import { BorderlessButton } from 'react-native-gesture-handler';
+import { useTheme } from 'styled-components';
 import { McText, McImage, McButton } from 'Components';
+import { Images, Metrics } from 'Constants';
 
-const { width, height } = Dimensions.get('window');
-
-const Welcome = ({navigation}) => {
-  const theme = useTheme();
-  return (
-    <View style={{
-        flex: 1,
-        backgroundColor: theme.colors.boxBackground,
-      }}
-    >
-      <View style={{
-        flex: 1,
-        borderBottomRightRadius: 75,
-        backgroundColor: theme.colors.text2,
-        justifyContent: 'flex-end',
-        overflow: 'hidden',
-      }}>
-        <McImage source={Slides[0].image.src} 
-          style={{
-            width: width - 75,
-            height: ( (width - 75) * Slides[0].image.height ) / Slides[0].image.width,
-          }}
-        />
-      </View>
-      <View style={{
-        flex: 1,
-        borderBottomRightRadius: 75,
-      }}>
-        <View style={{
-          backgroundColor: theme.colors.text2,
-          position: 'absolute',
-          top: 0,
-          left: 0,
-          bottom: 0,
-          right: 0,
-        }}>
-          <View style={{
-            flex: 1,
-            borderTopLeftRadius: 75,
-            backgroundColor: theme.colors.boxBackground,
-            justifyContent: 'space-evenly',
-            alignItems: 'center',
-            padding: 75,
-          }}>
-            <McText semi size={20}>Empecemos</McText>
-            <McText regular size={15} color={theme.colors.text3} align='center'>Ingresa o registrate para empezar tu cambio! 🎉 </McText>
-            <McButton primary onPress={() => {
-              navigation.navigate('Login')
-            }}>
-              <McText regular align='center'>Ingresa</McText>
-            </McButton>
-            <McButton secondary>
-              <McText regular color={theme.colors.white} align='center'>Únete, es gratis! 🎉 </McText>
-            </McButton>
-            <McButton transparent>
-              <McText regular align='center'>Olvidaste tu contraseña?</McText>
-            </McButton>
-          </View>
-        </View>
-        
-      </View>
-    </View>
-  )
+const { width } = Dimensions.get('window');
+const picture = {
+    src: Images.man,
+    width: 408,
+    height: 612
 }
 
-export default Welcome
+export const assets = [picture.src];
+
+const Welcome = ({ navigation }) => {
+    const theme = useTheme();
+    
+    return (
+        <View 
+          style={{
+            flex: 1,
+            backgroundColor: theme.colors.boxBackground
+          }}
+        >
+            <View 
+                style={{
+                  flex: 1,
+                  borderBottomRightRadius: Metrics.rad.xlarge,
+                  backgroundColor: theme.colors.grey2,
+                  alignItems: 'center',
+                  justifyContent: 'flex-end',
+                }}
+              >
+                <McImage 
+                    source={picture.src}
+                    style={{ 
+                        width: width - Metrics.rad.xlarge, 
+                        height: ((width - Metrics.rad.xlarge) * picture.height) / picture.width
+                    }}
+                />
+            </View>
+            <View 
+              style={{
+                flex: 1,
+                borderTopLeftRadius: Metrics.rad.xlarge,
+              }}
+            >
+                <View 
+                  style={{
+                    backgroundColor: theme.colors.grey2,
+                    position: 'absolute',
+                    top: 0,
+                    left: 0,
+                    right: 0,
+                    bottom: 0,
+                  }}
+                />
+                <View 
+                  style={{
+                    flex: 1,
+                    backgroundColor: theme.colors.boxBackground,
+                    borderTopLeftRadius: Metrics.rad.xlarge,
+                    justifyContent: 'space-evenly',
+                    alignItems: 'center',
+                    padding: Metrics.rad.xlarge,
+                  }}
+                >
+                    <McText title2>Let's get started</McText>
+                    <McText body style={{textAlign: 'center'}}>
+                        Login to your account below or signup for an amazing experience
+                    </McText>
+                    <McButton 
+                        primary
+                        onPress={() => navigation.navigate("Login")}
+                    >
+                      <McText regular color={theme.colors.white} align='center'>Have an account? Login</McText>
+                    </McButton>
+                    <McButton 
+                        secondary
+                        onPress={() => navigation.navigate("Signup")}
+                    >
+                      <McText regular color={theme.colors.white} align='center'>Join us, it's Free</McText>
+                    </McButton>
+                    <BorderlessButton 
+                        onPress={() => navigation.navigate("ForgotPassword")}
+                    >
+                        <McText button color={theme.colors.black} align='center'>Forgot password?</McText>
+                    </BorderlessButton>
+                </View>
+            </View>
+        </View>
+    );
+}
+
+export default Welcome;

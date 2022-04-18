@@ -1,4 +1,4 @@
-import Onboarding from "./Onboarding";
+import Onboarding from "./Onboarding/Onboarding";
 import Welcome from "./Welcome/Welcome";
 import Login from "./Login";
 import Signup from "./Signup";

@@ -114,42 +114,53 @@ const McText = styled.Text`
       }
     }
   }}
-  ${({ body1, body2, body3, body4, body5, body6 }) => {
+  ${({ hero, title1, title2, title3, body, button, header }) => {
     switch (true) {
-      case body1: {
+      case hero: {
         return {
-          fontFamily: Fonts.type.regular,
-          fontSize: `${Metrics.body1}px`,
+          fontFamily: Fonts.type.bold,
+          fontSize: `${Metrics.hero}px`,
+          lineHeight: `${Metrics.hero}px`,
         };
       }
-      case body2: {
+      case title1: {
         return {
-          fontFamily: Fonts.type.regular,
-          fontSize: `${Metrics.body2}px`,
+          fontFamily: Fonts.type.semiBold,
+          fontSize: `${Metrics.title1}px`,
+
         };
       }
-      case body3: {
+      case title2: {
         return {
-          fontFamily: Fonts.type.regular,
-          fontSize: `${Metrics.body3}px`,
+          fontFamily: Fonts.type.semiBold,
+          fontSize: `${Metrics.title2}px`,
+          lineHeight: `${Metrics.title2+6}px`,
         };
       }
-      case body4: {
+      case title3: {
         return {
-          fontFamily: Fonts.type.regular,
-          fontSize: `${Metrics.body4}px`,
+          fontFamily: Fonts.type.semiBold,
+          fontSize: `${Metrics.title3}px`,
         };
       }
-      case body5: {
+      case body: {
         return {
           fontFamily: Fonts.type.regular,
-          fontSize: `${Metrics.body5}px`,
+          fontSize: `${Metrics.body}px`,
+          lineHeight: `${Metrics.body+8}px`
         };
       }
-      case body6: {
+      case button: {
         return {
-          fontFamily: Fonts.type.regular,
-          fontSize: `${Metrics.body6}px`,
+          fontFamily: Fonts.type.medium,
+          fontSize: `${Metrics.button}px`,
+        };
+      }
+      case header: {
+        return {
+          fontFamily: Fonts.type.semiBold,
+          fontSize: `${Metrics.header}px`,
+          lineHeight: `${Metrics.header*2}px`,
         };
       }
     }

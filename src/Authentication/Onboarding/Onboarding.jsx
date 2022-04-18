@@ -10,31 +10,31 @@ import { Slide } from "Authentication/shared";
 import { Slides } from "Mock";
 import { Subslide, Dot } from "Authentication/shared";
 import { McImage } from 'Components';
-
+import { Metrics } from 'Constants';
 const { width, height } = Dimensions.get("window");
+export const SLIDE_HEIGHT = 0.61 * height;
 const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: "white",
   },
   slider: {
-    height: 0.61 * height,
-    borderBottomRightRadius: 75,
+    height: SLIDE_HEIGHT,
+    borderBottomRightRadius: Metrics.rad.xlarge,
   },
   pagination: {
     ...StyleSheet.absoluteFillObject,
-    height: 75,
-    flexDirection: 'row',
-    justifyContent: 'center',
-    alignItems: 'center',
+    height: Metrics.rad.xlarge,
+    flexDirection: "row",
+    justifyContent: "center",
+    alignItems: "center",
   },
   footer: {
     flex: 1,
   },
   footerContent: {
-    backgroundColor: "white",
-    borderTopLeftRadius: 75,
     flex: 1,
+    borderTopLeftRadius: Metrics.rad.xlarge,
   },
   underlay: {
     ...StyleSheet.absoluteFillObject,
@@ -68,8 +68,8 @@ const Onboarding = ({navigation}) => {
               <McImage
                 source={image.src}
                 style={{ 
-                  width: width - 75,
-                  height: ( (width - 75) * image.height ) / image.width,
+                  width: width - Metrics.rad.xlarge,
+                  height: ( (width - Metrics.rad.xlarge) * image.height ) / image.width,
                 }}
               />
             </Animated.View>
@@ -97,7 +97,7 @@ const Onboarding = ({navigation}) => {
           }}
         />
         <View
-          style={ styles.footerContent }
+          style={ [styles.footerContent, { backgroundColor: theme.colors.boxBackground }] }
         >
           <View style={styles.pagination}>
             {Slides.map((_, index) => (

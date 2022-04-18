@@ -10,21 +10,31 @@ const AuthenticationNavigator = () => {
             headerShown: false
         }}>
             <AuthenticationStack.Screen name="OnBoarding" component={ Onboarding } />
-            <AuthenticationStack.Screen name="Welcome" component={ Welcome } options={{
-                gestureEnabled: false,
-            }}/>
-            <AuthenticationStack.Screen name="Login" component={ Login } options={{
-                gestureEnabled: false,
-            }}/>
-            <AuthenticationStack.Screen name="Signup" component={ Signup } options={{
-                gestureEnabled: false,
-            }}/>
-            <AuthenticationStack.Screen name="ForgotPassword" component={ ForgotPassword } options={{
-                gestureEnabled: false,
-            }}/>
-            <AuthenticationStack.Screen name="PasswordChanged" component={ PasswordChanged } options={{
-                gestureEnabled: false,
-            }}/>
+            <AuthenticationStack.Screen name="Welcome" component={ Welcome } 
+            // options={{
+            //     gestureEnabled: false,
+            // }}
+            />
+            <AuthenticationStack.Screen name="Login" component={ Login } 
+            // options={{
+            //     gestureEnabled: false,
+            // }}
+            />
+            <AuthenticationStack.Screen name="Signup" component={ Signup } 
+            // options={{
+            //     gestureEnabled: false,
+            // }}
+            />
+            <AuthenticationStack.Screen name="ForgotPassword" component={ ForgotPassword } 
+            // options={{
+            //     gestureEnabled: false,
+            // }}
+            />
+            <AuthenticationStack.Screen name="PasswordChanged" component={ PasswordChanged } 
+            // options={{
+            //     gestureEnabled: false,
+            // }}
+            />
         </AuthenticationStack.Navigator>
     );
 };

@@ -1,2 +1,3 @@
 import SocialLogin from "./SocialLogin/SocialLogin";
-export { SocialLogin };
+import Footer from "./Footer/Footer";
+export { SocialLogin, Footer };

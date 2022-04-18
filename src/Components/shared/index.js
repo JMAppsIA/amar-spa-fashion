@@ -1,4 +1,4 @@
 import Container from "./Container/Container";
-import Footer from "./Footer/Footer";
-
-export { Container, Footer };
+import RoundedIconButton from "./RoundedIconButton/RoundedIconButton";
+import Header from "./Header/Header";
+export { Container, RoundedIconButton, Header };
